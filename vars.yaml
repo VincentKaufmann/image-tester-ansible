@@ -9,5 +9,4 @@
      #- { name: Rstudio, image: RStudio Appliance (SWITCHengines) , flavor: c1.small, loginame: ubuntu }
      #- { name: Spark Zepellin, image: Spark Zeppelin (SWITCHengines), flavor: m1.medium, loginame: ubuntu }
 
-test
 

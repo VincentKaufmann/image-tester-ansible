@@ -37,6 +37,5 @@
       name: "{{ item.server.name}}"
       ansible_host: "{{item.server.public_v4}}"
       ansible_user: "{{ansible_user}}"
-      ansible_ssh_common_args: -i ./id_rsa_ambari -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+      ansible_ssh_common_args: -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
     with_items: "{{ instances.results }}"
-    with_items: groups['all']
