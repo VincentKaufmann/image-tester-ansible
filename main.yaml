@@ -12,7 +12,7 @@
        #boot_from_volume: True
       security_groups: ssh
       flavor: "{{ item.flavor }}"
-      key_name: kaufmann
+      key_name: 
       region_name: "{{ lookup('env', 'OS_REGION_NAME') }}"
       nics:
         - net-name: private
@@ -25,11 +25,11 @@
   - name: wait for ssh port 22 to become open
     wait_for:
       port: 22
-      host: "{{ item.server.openstack.public_v4 }}"
+      host: "{{ item.server.public_v4 }}"
       search_regex: OpenSSH
       delay: 3
     connection: local
-    with_items: "{{ instances.result }}"
+    with_items: "{{ instances.results }}"
 
 #################################### DEBUG ############################################################################################################
  
