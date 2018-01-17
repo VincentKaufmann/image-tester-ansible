@@ -1,11 +1,11 @@
 ---
 instance_definitions:
   - { name: Debian Jessie,   image: Debian Jessie 8 (SWITCHengines),      flavor: c1.small,  loginame: debian }
-  - { name: Debian Stretch,  image: Debian Stretch 9 (SWITCHengines),     flavor: c1.small,  loginame: debian }
- #- { name: Ubuntu Xenial,   image: Ubuntu Xenial 16.04 (SWITCHengines),  flavor: c1.small,  loginame: ubuntu }
- #- { name: Ubuntu Trusty,   image: Ubuntu Trusty 14.04 (SWITCHengines),  flavor: c1.small,  loginame: ubuntu }
- #- { name: Fedora,          image: Fedora 25 (SWITCHengines),            flavor: c1.small,  loginame: fedora }
- #- { name: CentOS,          image: CentOS 7 (SWITCHengines),             flavor: c1.small,  loginame: centos }
- #- { name: Rstudio,         image: RStudio Appliance (SWITCHengines) ,   flavor: c1.small,  loginame: ubuntu }
- #- { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginame: ubuntu }
+  #- { name: Debian Stretch,  image: Debian Stretch 9 (SWITCHengines),     flavor: c1.small,  loginame: debian }
+  #- { name: Ubuntu Xenial,   image: Ubuntu Xenial 16.04 (SWITCHengines),  flavor: c1.small,  loginame: ubuntu }
+  #- { name: Ubuntu Trusty,   image: Ubuntu Trusty 14.04 (SWITCHengines),  flavor: c1.small,  loginame: ubuntu }
+  #- { name: Fedora,          image: Fedora 25 (SWITCHengines),            flavor: c1.small,  loginame: fedora }
+  #- { name: CentOS,          image: CentOS 7 (SWITCHengines),             flavor: c1.small,  loginame: centos }
+  #- { name: Rstudio,         image: RStudio Appliance (SWITCHengines) ,   flavor: c1.small,  loginame: ubuntu }
+  #- { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginame: ubuntu }
  ###############################################################################################################

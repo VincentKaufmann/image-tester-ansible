@@ -1,9 +1,6 @@
 #########CREATING VM########################
 ---
 - hosts: localhost
-  vars:
-    http_port: 80
-    max_clients: 200
   vars_files:
    - vars.yaml
   tasks:
@@ -23,9 +20,14 @@
     register: instances
     with_items: "{{ instance_definitions }}"
 ######DELAY#################################
-  - name: whait 15 seconds
-    pause: seconds=15
-    when: instances.changed
+- name: wait for ssh port 22 to become open
+  wait_for:
+    port: 22
+    host: "{{ item.server.openstack.public_v4 }}"
+    search_regex: OpenSSH
+    delay: 3
+  connection: local
+  with_items: "{{ instances.result }}"
 ######DEBUG#################################
   - name: display results
     debug:
@@ -34,15 +36,24 @@
 ######ADD VM TO INVENTORY###################
   - name: Add new VM to ansible Inventory
     add_host:
-      name: "{{ item.server.name}}"
-      ansible_host: "{{item.server.public_v4}}"
-      ansible_user: "{{ansible_user}}"
+      name: "{{ item.server.name }}"
+      ansible_host: "{{ item.server.public_v4 }}"
+      ansible_user: "{{ item.item.loginname }}"
       ansible_ssh_common_args: -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
-      groups: just_created
+      groups: openstack_servers
     with_items: "{{ instances.results }}"
 ######PRINT HOST INVENTORY##################
 #    #ansible localhost -m debug -a 'var=groups.keys()'
 #
+
+
+# AND DO SOME SHIT WITH THOSE SERVERS
+- hosts: openstack_servers
+  tasks:
+  - name: do something
+    shell: hostname -f 
+
+
 #######Configure all hosts##################
 #  - name: Configure all hosts
 #    become: true
