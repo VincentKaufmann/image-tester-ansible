@@ -12,10 +12,10 @@
       name: "{{ item.name }}"
       state: present
       image: "{{ item.image }}"
-      boot_from_volume: True
+       #boot_from_volume: True
       security_groups: ssh
       flavor: "{{ item.flavor }}"
-      key_name: kaufmann
+      key_name: 
       region_name: "{{ lookup('env', 'OS_REGION_NAME') }}"
       nics:
         - net-name: private
@@ -38,4 +38,7 @@
       ansible_host: "{{item.server.public_v4}}"
       ansible_user: "{{ansible_user}}"
       ansible_ssh_common_args: -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+      groups: just_created
     with_items: "{{ instances.results }}"
+######PRINT HOST INVENTORY#################################
+    groups['just_created']
