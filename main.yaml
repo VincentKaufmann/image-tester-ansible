@@ -41,4 +41,39 @@
       groups: just_created
     with_items: "{{ instances.results }}"
 ######PRINT HOST INVENTORY##################
-    ansible localhost -m debug -a 'var=groups.keys()'
+    #ansible localhost -m debug -a 'var=groups.keys()'
+
+#######Configure all hosts##################
+  - name: Configure all hosts
+    become: true
+    hosts:
+      - "Debian Jessie"
+      - "Debian Stretch"
+      - "Ubuntu Xenial"
+      - "Ubuntu Trusty"
+      - "Fedora"
+      - "CentOS"
+      - "Rstudio"
+      - "Spark Zepellin"
+
+
+#######RUN TESTING ON HOSTS##################
+#  - name: Run test scripts on Hosts
+#  become: true
+#  hosts:
+#    - "ambari1"
+#  tasks:
+#  - name: Add Ambari Repo
+#    apt_repository: repo='deb http://public-repo-1.hortonworks.com/ambari/ubuntu14/2.x/updates/2.2.2.0 Ambari     main' state=present filename='ambari'#
+#
+#  - name: upgrade all packages
+#    apt: upgrade=dist update_cache=yes
+# 
+#  - name: Check if Ambari is already installed
+#    stat: path=/var/run/ambari-server/
+#    register: ambari_is_installed
+#
+#
+#  - name: server start
+#    command: ambari-server start
+#    when: ambari_is_installed.stat.exists == False
