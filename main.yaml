@@ -22,7 +22,7 @@
       wait: yes
     register: instances
     with_items: "{{ instance_definitions }}"
-############################################
+######DELAY#################################
   - name: whait 15 seconds
     pause: seconds=15
     when: instances.changed
@@ -31,7 +31,7 @@
     debug:
       msg: "{{ item }}"
     with_items: "{{ instances.results }}"
-############################################
+######ADD VM TO INVENTORY###################
   - name: Add new VM to ansible Inventory
     add_host:
       name: "{{ item.server.name}}"
@@ -40,5 +40,5 @@
       ansible_ssh_common_args: -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
       groups: just_created
     with_items: "{{ instances.results }}"
-######PRINT HOST INVENTORY#################################
-    groups['just_created']
+######PRINT HOST INVENTORY##################
+    ansible localhost -m debug -a 'var=groups.keys()'
