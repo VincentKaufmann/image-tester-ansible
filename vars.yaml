@@ -8,4 +8,3 @@ instance_definitions:
  # - { name: CentOS,          image: CentOS 7 (SWITCHengines),             flavor: c1.small,  loginame: centos }
  # - { name: Rstudio,         image: RStudio Appliance (SWITCHengines) ,   flavor: c1.small,  loginame: ubuntu }
  # - { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginame: ubuntu }
-
