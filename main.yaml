@@ -52,15 +52,31 @@
 #################################### DEBUG PRINT HOST INVENTORY #######################################################################################
 #    #ansible localhost -m debug -a 'var=groups.keys()'
 #
-
-
+#
+#
 #################################### AND DO SOME SHIT WITH THOSE SERVERS ##############################################################################
 
 - hosts: openstack_servers
   tasks:
-  - name: do something
-    shell: hostname -f 
-    
+  - name: Installing Htop
+    shell: hostname -f
+  - name: Install Htop APT
+    become: True
+    become_user: root                                                                                                                      
+    apt:
+      update_cache: yes
+      name: htop
+      state: latest
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+#      
+  - name: Install Htop YUM
+    become: True
+    become_user: root  
+    yum:  
+      name: htop
+      state: latest
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Fedora'
+
 #################################### Configure all hosts ##############################################################################################
 # 
 #  - name: Configure all hosts
@@ -76,27 +92,27 @@
 #      - "Spark Zepellin"
 #
 #################################### RUN TESTING ON HOSTS #############################################################################################
-#
-#  - name: Run test scripts on Hosts
-#  become: true
-#  hosts:
-#    - "ambari1"
-#  tasks:
-#  - name: Add Ambari Repo
-#    apt_repository: repo='deb http://     main' state=present filename=''#
-#
-#  - name: upgrade all packages
-#    apt: upgrade=dist update_cache=yes
-# 
-#  - name: Check if Ambari is already installed
-#    stat: path=/var/run/ambari-server/
-#    register: ambari_is_installed
-#
-#  - name: server start
-#    command: ambari-server start
-#    when: ambari_is_installed.stat.exists == False
-#
-#
+#                                                                                                                                                     #
+#  - name: Run test scripts on Hosts                                                                                                                  #
+#  become: true                                                                                                                                       #
+#  hosts:                                                                                                                                             #
+#    - " "                                                                                                                                      #
+#  tasks:                                                                                                                                             #
+#  - name: Add server Repo                                                                                                                            #
+#    apt_repository: repo='deb http://     main' state=present filename=''#                                                                           #
+#                                                                                                                                                     #
+#  - name: upgrade all packages                                                                                                                       #
+#    apt: upgrade=dist update_cache=yes                                                                                                               #
+#                                                                                                                                                     #
+#  - name: Check if Ambari is already installed                                                                                                       #
+#    stat: path=/var/run/server/                                                                                                               #
+#    register: server_is_installed                                                                                                                    #
+#                                                                                                                                                     #
+#  - name: server start                                                                                                                               #
+#    command: server start                                                                                                                     #
+#    when: server_is_installed.stat.exists == False                                                                                                   #
+#                                                                                                                                                     #
+#                                                                                                                                                     #
 #██╗███╗   ███╗ █████╗  ██████╗ ███████╗ ████████╗███████╗███████╗████████╗███████╗██████╗        █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗#
 #██║████╗ ████║██╔══██╗██╔════╝ ██╔════╝ ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝██╔══██╗      ██╔══██╗████╗  ██║██╔════╝██║██╔══██╗██║     ██╔════╝#
 #██║██╔████╔██║███████║██║  ███╗█████╗█████╗██║   █████╗  ███████╗   ██║   █████╗  ██████╔╝█████╗███████║██╔██╗ ██║███████╗██║██████╔╝██║     █████╗  #

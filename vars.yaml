@@ -1,11 +1,11 @@
 ---
 instance_definitions:
-   - { name: Debian Jessie,   image: Debian Jessie 8 (SWITCHengines),      flavor: c1.small,  loginname: debian }
-  #- { name: Debian Stretch,  image: Debian Stretch 9 (SWITCHengines),     flavor: c1.small,  loginname: debian }
-   - { name: Ubuntu Xenial,   image: Ubuntu Xenial 16.04 (SWITCHengines),  flavor: c1.small,  loginname: ubuntu }
-  #- { name: Ubuntu Trusty,   image: Ubuntu Trusty 14.04 (SWITCHengines),  flavor: c1.small,  loginname: ubuntu }
-  #- { name: Fedora,          image: Fedora 25 (SWITCHengines),            flavor: c1.small,  loginname: fedora }
-  #- { name: CentOS,          image: CentOS 7 (SWITCHengines),             flavor: c1.small,  loginname: centos }
-  #- { name: Rstudio,         image: RStudio Appliance (SWITCHengines) ,   flavor: c1.small,  loginname: ubuntu }
-  #- { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginname: ubuntu }
- ###############################################################################################################
+   - { name: Debian Jessie,   image: Debian Jessie 8,      flavor: c1.small,  loginname: debian }
+   - { name: Debian Stretch,  image: Debian Stretch 9,     flavor: c1.small,  loginname: debian }
+  #- { name: Ubuntu Xenial,   image: Ubuntu Xenial 16.04,  flavor: c1.small,  loginname: ubuntu }
+  #- { name: Ubuntu Trusty,   image: Ubuntu Trusty 14.04,  flavor: c1.small,  loginname: ubuntu }
+   - { name: Fedora,          image: Fedora 25,            flavor: c1.small,  loginname: fedora }
+  #- { name: CentOS,          image: CentOS 7,             flavor: c1.small,  loginname: centos }
+  #- { name: Rstudio,         image: RStudio Appliance,    flavor: c1.small,  loginname: ubuntu }
+  #- { name: Spark Zepellin,  image: Spark Zeppelin,       flavor: m1.medium, loginname: ubuntu }
+#################################################################################################################
