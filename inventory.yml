@@ -1,0 +1,9 @@
+[Ubuntu_Hosts]
+86.119.0.
+
+
+[all:vars] 
+#ansible_become=false
+#ansible_connection=local
+ansible_ssh_user=ubuntu
+ansible_ssh_private_key_file=~/Users/km/.ssh/id_rsa

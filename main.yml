@@ -2,7 +2,7 @@
 ---
 - hosts: localhost
   vars_files:
-   - vars.yaml
+   - vars.yml
   tasks:
   - name: create VM
     os_server:
@@ -32,12 +32,12 @@
     with_items: "{{ instances.results }}"
 
 #################################### DEBUG ############################################################################################################
- 
-  - name: display results
-    debug:
-      msg: "{{ item }}"
-    with_items: "{{ instances.results }}"
-
+# 
+# - name: display results
+#   debug:
+#     msg: "{{ item }}"
+#   with_items: "{{ instances.results }}"
+#
 #################################### ADD VM TO INVENTORY ##############################################################################################
 
   - name: Add new VM to ansible Inventory
