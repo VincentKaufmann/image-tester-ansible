@@ -2,7 +2,7 @@
 ---
 - hosts: localhost
   vars_files:
-   - vars.yml
+   - hosts.yml
   tasks:
   - name: create VM
     os_server:
@@ -12,7 +12,7 @@
        #boot_from_volume: True
       security_groups: ssh
       flavor: "{{ item.flavor }}"
-      key_name: 
+      key_name: kaufmann
       region_name: "{{ lookup('env', 'OS_REGION_NAME') }}"
       nics:
         - net-name: private

@@ -19,7 +19,7 @@
 #    fetch:
 #      #remote_src: true
 #      src: /home/ubuntu/destination/test_download.txt
-#      dest: /Users/kaufmann/Documents/Ansible/vm/2.0
+#      dest: /Users/km/Documents/Ansible/vm/2.0
 #      state: file
 
 
@@ -30,7 +30,7 @@
 #  - name:
 #    fetch:
 #      #remote_src: true
-#      src: /Users/kaufmann/Documents/Ansible/vm/2.0/nc.sh
+#      src: /Users/km/Documents/Ansible/vm/2.0/nc.sh
 #      dest: /home/ubuntu/destination/nc.sh
 #      state: file
 
@@ -58,3 +58,4 @@
   #  command: netcat -l -p 23  
   #  become: True                                                                                                                  #
   #  when: ansible_distribution == 'Debian'
+
