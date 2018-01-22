@@ -2,7 +2,7 @@
 - name: "installation on IP host"
   hosts: Hosts
   tasks:
-  - name: Install Htop APT
+  - name: Install GEDIT
     become: True                                                                                                                      
     apt:
       update_cache: yes
