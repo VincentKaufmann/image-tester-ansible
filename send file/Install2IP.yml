@@ -1,29 +1,26 @@
 ---
-- name: "Installation on IP Host"
-  hosts: Ubuntu_Hosts
+- name: "installation on IP host"
+  hosts: Hosts
   tasks:
   - name: Install Htop APT
-    become: True
-    become_user: root                                                                                                                      
+    become: True                                                                                                                      
     apt:
       update_cache: yes
-      name: netcat
+      name: gedit
       state: latest
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  
+   
 
-- name: "Download files to Host"
-  hosts: Ubuntu_Hosts
+
+- name: "copy files to host to Debian"
+  hosts: Hosts
   tasks:
-  - name:
-    fetch:
-      #remote_src: true
-      src: /home/ubuntu/destination/test_download.txt
-      dest: /Users/kaufmann/Documents/Ansible/vm/2.0
-      state: file
-
-
-TESTETSTETSTETESTE
+  - name: Copying files to Host to Debian                                                                                                        
+    copy:
+      src: /Users/kaufmann/Documents/Ansible/vm/2.0/Playbooks/send_files/file.txt
+      dest: "/home/{{ ansible_user }}/toto.txt"
+      mode: 0755
+    when: ansible_distribution == 'Debian'
 
 
 #- name: "Download files to Host"
