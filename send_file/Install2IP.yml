@@ -12,15 +12,15 @@
    
 
 
-- name: "copy files to host to Debian"
+- name: "copy files to Host"
   hosts: Hosts
   tasks:
-  - name: Copying files to Host to Debian                                                                                                        
+  - name: Copying files to Host                                                                                                       
     copy:
-      src: /Users/kaufmann/Documents/Ansible/vm/2.0/Playbooks/send_files/file.txt
-      dest: "/home/{{ ansible_user }}/toto.txt"
+      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/send_file/file.txt
+      dest: "/home/{{ ansible_user }}/file.txt"
       mode: 0755
-    when: ansible_distribution == 'Debian'
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 
 #- name: "Download files to Host"
