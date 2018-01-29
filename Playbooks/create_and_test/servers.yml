@@ -9,3 +9,5 @@ instance_definitions:
   #- { name: Rstudio,         image: RStudio Appliance (SWITCHengines),    flavor: c1.small,  loginname: ubuntu }
   #- { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginname: ubuntu }
 #################################################################################################################
+# Select OS that you want to test, you can also change the flavor. C1.small is the minimum flavor of Debian, Ubuntu, Fedora, Rstudio.
+# m1.medium is the minimum flavor for Spark Zepellin

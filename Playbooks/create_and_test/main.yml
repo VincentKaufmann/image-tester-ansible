@@ -2,7 +2,7 @@
 ---
 - hosts: localhost
   vars_files:
-   - hosts.yml
+   - servers.yml
   tasks:
   - name: create VM
     os_server:
@@ -54,7 +54,34 @@
 #
 #
 #
-#################################### AND DO SOME SHIT WITH THOSE SERVERS ##############################################################################
+#################################### Send test-scripts to VM ##############################################################################
+
+- hosts: openstack_servers
+  tasks:
+  - name: Copying files to APT-Host
+    become: True
+    become_user: root                                                                                                       
+    copy:
+      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/scripts/ubuntu_debian/
+      dest: "/home/{{ ansible_user }}/scripts/"
+      owner: root
+      mode: 0755
+    with_fileglob:
+      - /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/scripts/ubuntu_debian/*
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+#    
+  - name: Copying files to YUM-Host
+    become: True
+    become_user: root                                                                                                       
+    copy:
+      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/scripts/fedora_centos/
+      dest: "/home/{{ ansible_user }}/scripts/"
+      owner: root
+      mode: 0755
+    with_fileglob:
+      - /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/scripts/fedora_centos/*
+    when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS'
+
 
 - hosts: openstack_servers
   tasks:
@@ -77,40 +104,7 @@
       state: latest
     when: ansible_distribution == 'CentOS' or ansible_distribution == 'Fedora'
 
-#################################### Configure all hosts ##############################################################################################
-# 
-#  - name: Configure all hosts
-#    become: true
-#    hosts:
-#      - "Debian Jessie"
-#      - "Debian Stretch"
-#      - "Ubuntu Xenial"
-#      - "Ubuntu Trusty"
-#      - "Fedora"
-#      - "CentOS"
-#      - "Rstudio"
-#      - "Spark Zepellin"
-#
-#################################### RUN TESTING ON HOSTS #############################################################################################
-#                                                                                                                                                     #
-#  - name: Run test scripts on Hosts                                                                                                                  #
-#  become: true                                                                                                                                       #
-#  hosts:                                                                                                                                             #
-#    - " "                                                                                                                                      #
-#  tasks:                                                                                                                                             #
-#  - name: Add server Repo                                                                                                                            #
-#    apt_repository: repo='deb http://     main' state=present filename=''#                                                                           #
-#                                                                                                                                                     #
-#  - name: upgrade all packages                                                                                                                       #
-#    apt: upgrade=dist update_cache=yes                                                                                                               #
-#                                                                                                                                                     #
-#  - name: Check if Ambari is already installed                                                                                                       #
-#    stat: path=/var/run/server/                                                                                                               #
-#    register: server_is_installed                                                                                                                    #
-#                                                                                                                                                     #
-#  - name: server start                                                                                                                               #
-#    command: server start                                                                                                                     #
-#    when: server_is_installed.stat.exists == False                                                                                                   #
+                                                                               #
 #                                                                                                                                                     #
 #                                                                                                                                                     #
 #██╗███╗   ███╗ █████╗  ██████╗ ███████╗ ████████╗███████╗███████╗████████╗███████╗██████╗        █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗#
