@@ -11,6 +11,12 @@ Openstack CLI tool
 
 Folder Structure:
 
-Playbooks = Contains all Playbooks
-    Create_VMs = Contains main.yml and host file, to edit the diffrent OS you want to test, you can also specify the Flavour and name. Run ansible-playbook main.yml to create the VMs.
-    Install2IP = Contains Install2IP.yml and host file, 
+Playbooks = contains create_and_test folder.
+create_and_test = contains main.yml and servers.yml
+
+Servers created
+servers tested
+
+to change OS to be tested or flavors edit servers.yml
+
+to run Testing, run: ansible-playbook main.yml
