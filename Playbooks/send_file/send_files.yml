@@ -6,12 +6,12 @@
     become: True
     become_user: root                                                                                                       
     copy:
-      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/send_file/scripts/ubuntu_debian/
+      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/send_file/scripts/ubuntu_debian/
       dest: "/home/{{ ansible_user }}/scripts/"
       owner: root
       mode: 0755
     with_fileglob:
-      - /Users/kaufmann/Documents/Ansible/image-tester-ansible/send_file/scripts/ubuntu_debian/*
+      - /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/send_file/scripts/ubuntu_debian/*
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 
@@ -22,10 +22,10 @@
     become: True
     become_user: root                                                                                                       
     copy:
-      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/send_file/scripts/fedora_centos/
+      src: /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/send_file/scripts/fedora_centos/
       dest: "/home/{{ ansible_user }}/scripts/"
       owner: root
       mode: 0755
     with_fileglob:
-      - /Users/kaufmann/Documents/Ansible/image-tester-ansible/send_file/scripts/fedora_centos/*
+      - /Users/kaufmann/Documents/Ansible/image-tester-ansible/Playbooks/send_file/scripts/fedora_centos/*
     when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS'
