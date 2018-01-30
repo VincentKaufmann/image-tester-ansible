@@ -1,0 +1,108 @@
+#################################### CREATING VM ######################################################################################################
+---
+- hosts: localhost
+  vars_files:
+   - servers.yml
+  tasks:
+  - name: create VM
+    os_server:
+      name: "{{ item.name }}"
+      state: present
+      image: "{{ item.image }}"
+       #boot_from_volume: True
+      security_groups: ssh
+      flavor: "{{ item.flavor }}"
+      key_name: kaufmann
+      region_name: "{{ lookup('env', 'OS_REGION_NAME') }}"
+      nics:
+        - net-name: private
+      wait: yes
+    register: instances
+    with_items: "{{ instance_definitions }}"
+
+#################################### DELAY ############################################################################################################
+ 
+  - name: wait for ssh port 22 to become open
+    wait_for:
+      port: 22
+      host: "{{ item.server.public_v4 }}"
+      search_regex: OpenSSH
+      delay: 3
+    connection: local
+    with_items: "{{ instances.results }}"
+
+#################################### DEBUG ############################################################################################################
+# 
+# - name: display results
+#   debug:
+#     msg: "{{ item }}"
+#   with_items: "{{ instances.results }}"
+#
+#################################### ADD VM TO INVENTORY ##############################################################################################
+
+  - name: Add new VM to ansible Inventory
+    add_host:
+      name: "{{ item.server.name }}"
+      ansible_host: "{{ item.server.public_v4 }}"
+      ansible_user: "{{ item.item.loginname }}"
+      ansible_ssh_common_args: -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+      groups: openstack_servers
+    with_items: "{{ instances.results }}"
+
+#################################### DEBUG PRINT HOST INVENTORY #######################################################################################
+#    ansible localhost -m debug -a 'var=groups.keys()'
+#
+#
+#
+#################################### COPY TEST-SCRIPTS TO VM ##########################################################################################
+
+- hosts: openstack_servers
+  tasks:
+  - name: Copying files to APT-Hosts
+    become: True
+    become_user: root                                                                                                       
+    copy:
+      src: "{{ playbook_dir }}/scripts/ubuntu_debian/"
+      dest: "/home/{{ ansible_user }}/scripts/"
+      owner: root
+      mode: 0755     
+    with_fileglob:
+      - "{{ playbook_dir }}/scripts/ubuntu_debian/*"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  - name: Copying files to YUM-Hosts
+    become: True
+    become_user: root                                                                                                       
+    copy:
+      src: "{{ playbook_dir }}/scripts/fedora_centos/"
+      dest: "/home/{{ ansible_user }}/scripts/"
+      owner: root
+      mode: 0755
+    with_fileglob:
+      - "{{ playbook_dir }}/scripts/fedora_centos/*"
+    when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS'
+
+  - name: Running Test Scripts on Hosts
+    become: True
+    command: sh /home/{{ ansible_user }}/scripts/01_ping.sh
+    command: sh /home/{{ ansible_user }}/scripts/02_hostname.sh
+    command: sh /home/{{ ansible_user }}/scripts/03_sudosu.sh
+    command: sh /home/{{ ansible_user }}/scripts/04_swiss_pools.sh
+    command: sh /home/{{ ansible_user }}/scripts/05_updates_enabled.sh
+    register: shelloutput
+
+  - debug: msg="{{ shelloutput.stdout }}"
+  - debug: msg="{{ shelloutput.stderr }}"
+
+
+    
+                                                                                                                                                      #
+#                                                                                                                                                     #
+#                                                                                                                                                     #
+#██╗███╗   ███╗ █████╗  ██████╗ ███████╗ ████████╗███████╗███████╗████████╗███████╗██████╗        █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗#
+#██║████╗ ████║██╔══██╗██╔════╝ ██╔════╝ ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝██╔══██╗      ██╔══██╗████╗  ██║██╔════╝██║██╔══██╗██║     ██╔════╝#
+#██║██╔████╔██║███████║██║  ███╗█████╗█████╗██║   █████╗  ███████╗   ██║   █████╗  ██████╔╝█████╗███████║██╔██╗ ██║███████╗██║██████╔╝██║     █████╗  #
+#██║██║╚██╔╝██║██╔══██║██║   ██║██╔══╝╚════╝██║   ██╔══╝  ╚════██║   ██║   ██╔══╝  ██╔══██╗╚════╝██╔══██║██║╚██╗██║╚════██║██║██╔══██╗██║     ██╔══╝  #
+#██║██║ ╚═╝ ██║██║  ██║╚██████╔╝███████╗    ██║   ███████╗███████║   ██║   ███████╗██║  ██║      ██║  ██║██║ ╚████║███████║██║██████╔╝███████╗███████╗#
+#╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝#
+#######################################################################################################################################################

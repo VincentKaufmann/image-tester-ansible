@@ -1,1 +1,1 @@
-cat /etc/ntp.conf
+cat /etc/ntp.conf | grep pool

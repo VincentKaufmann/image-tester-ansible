@@ -70,25 +70,6 @@
       - "{{ playbook_dir }}/scripts/ubuntu_debian/*"
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-
-
-- hosts: openstack_servers
-  tasks:
-  - name: Running Test Scripts on Hosts
-    become: True
-    become_user: root 
-    command: sh /home/{{ ansible_user }}/scripts/01_ping.sh
-    command: sh /home/{{ ansible_user }}/scripts/02_hostname.sh
-    command: sh /home/{{ ansible_user }}/scripts/03_sudosu.sh
-    command: sh /home/{{ ansible_user }}/scripts/04_swiss_pools.sh
-    command: sh /home/{{ ansible_user }}/scripts/05_updates_enabled.sh
-    register: shelloutput
-  - debug: msg="{{ shelloutput.stdout }}"
-  - debug: msg="{{ shelloutput.stderr }}"
-
-
-
-#    
   - name: Copying files to YUM-Hosts
     become: True
     become_user: root                                                                                                       
@@ -101,7 +82,18 @@
       - "{{ playbook_dir }}/scripts/fedora_centos/*"
     when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS'
 
-
+  - name: Running Test Scripts on Hosts
+    become: True
+    command: sh /home/{{ ansible_user }}/scripts/01_ping.sh
+    command: sh /home/{{ ansible_user }}/scripts/02_hostname.sh
+    command: sh /home/{{ ansible_user }}/scripts/03_sudosu.sh
+    command: sh /home/{{ ansible_user }}/scripts/04_swiss_pools.sh
+    command: sh /home/{{ ansible_user }}/scripts/05_updates_enabled.sh
+    register: shelloutput
+    failed_when: "'FAILED' in shelloutput.stderr"
+    
+  - debug: msg="{{ shelloutput.stdout }}"
+  - debug: msg="{{ shelloutput.stderr }}"
 
     
                                                                                                                                                       #
