@@ -50,7 +50,7 @@
     with_items: "{{ instances.results }}"
 
 #################################### DEBUG PRINT HOST INVENTORY #######################################################################################
-#    #ansible localhost -m debug -a 'var=groups.keys()'
+#    ansible localhost -m debug -a 'var=groups.keys()'
 #
 #
 #
@@ -81,7 +81,7 @@
     with_fileglob:
       - "{{ playbook_dir }}/scripts/fedora_centos/*"
     when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS'
-                                                                               #
+                                                                                                                                                      #
 #                                                                                                                                                     #
 #                                                                                                                                                     #
 #██╗███╗   ███╗ █████╗  ██████╗ ███████╗ ████████╗███████╗███████╗████████╗███████╗██████╗        █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗#
