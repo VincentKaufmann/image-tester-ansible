@@ -1,12 +1,12 @@
 ---
 instance_definitions:
    - { name: Ubuntu Xenial,   image: Ubuntu Xenial 16.04 (SWITCHengines),  flavor: c1.small,  loginname: ubuntu }
-   - { name: Ubuntu Trusty,   image: Ubuntu Trusty 14.04 (SWITCHengines),  flavor: c1.small,  loginname: ubuntu }
-   - { name: RStudio,         image: RStudio Appliance (SWITCHengines),    flavor: c1.small,  loginname: ubuntu }   
-   - { name: Debian Stretch,  image: Debian Stretch 9 (SWITCHengines),     flavor: c1.small,  loginname: debian }
+  #- { name: Ubuntu Trusty,   image: Ubuntu Trusty 14.04 (SWITCHengines),  flavor: c1.small,  loginname: ubuntu }
+  #- { name: RStudio,         image: RStudio Appliance (SWITCHengines),    flavor: c1.small,  loginname: ubuntu }   
+  #- { name: Debian Stretch,  image: Debian Stretch 9 (SWITCHengines),     flavor: c1.small,  loginname: debian }
    - { name: Debian Jessie,   image: Debian Jessie 8 (SWITCHengines),      flavor: c1.small,  loginname: debian }
-   - { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginname: ubuntu }
-   - { name: Fedora,          image: Fedora 25 (SWITCHengines),            flavor: c1.small,  loginname: fedora }
+  #- { name: Spark Zepellin,  image: Spark Zeppelin (SWITCHengines),       flavor: m1.medium, loginname: ubuntu }
+  #- { name: Fedora,          image: Fedora 25 (SWITCHengines),            flavor: c1.small,  loginname: fedora }
    - { name: CentOS,          image: CentOS 7 (SWITCHengines),             flavor: c1.small,  loginname: centos }
   ###############################################################################################################
 # Select OS that you want to test, you can also change the flavor. 
