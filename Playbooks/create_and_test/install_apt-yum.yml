@@ -1,0 +1,22 @@
+
+
+- hosts: openstack_servers
+  tasks:
+  - name: Installing Htop
+    shell: hostname -f
+  - name: Install Htop APT
+    become: True
+    become_user: root                                                                                                                      
+    apt:
+      update_cache: yes
+      name: htop
+      state: latest
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+#      
+  - name: Install Htop YUM
+    become: True
+    become_user: root  
+    yum:  
+      name: htop
+      state: latest
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Fedora'
