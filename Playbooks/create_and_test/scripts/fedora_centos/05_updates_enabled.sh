@@ -1,0 +1,1 @@
+systemctl status yum-cron.service
