@@ -1,7 +1,0 @@
-[Hosts]
-86.119.0.160 ansible_user=debian
-86.119.0.157 ansible_user=ubuntu
-86.119.0.183 ansible_user=fedora
-
-[all:vars] 
-ansible_ssh_common_args='-o StrictHostKeyChecking=no'

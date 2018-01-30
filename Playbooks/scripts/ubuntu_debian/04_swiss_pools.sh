@@ -1,1 +1,0 @@
-cat /etc/ntp.conf
