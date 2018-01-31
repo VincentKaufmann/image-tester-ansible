@@ -1,1 +1,1 @@
-echo "fail"
+echo "FAILED"

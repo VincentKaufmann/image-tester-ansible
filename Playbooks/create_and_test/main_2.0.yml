@@ -84,13 +84,13 @@
 
   - name: Running Test Scripts on Hosts
     become: True
-    command: sh /home/{{ ansible_user }}/scripts/01_ping.sh
-    command: sh /home/{{ ansible_user }}/scripts/02_hostname.sh
-    command: sh /home/{{ ansible_user }}/scripts/03_sudosu.sh
-    command: sh /home/{{ ansible_user }}/scripts/04_swiss_pools.sh
-    command: sh /home/{{ ansible_user }}/scripts/05_updates_enabled.sh
+    command: sh /home/{{ ansible_user }}/scripts/01_ping.sh >> ping.txt
+    command: sh /home/{{ ansible_user }}/scripts/02_hostname.sh >> hostname.txt
+    command: sh /home/{{ ansible_user }}/scripts/03_sudosu.sh >> sudosu.txt
+    command: sh /home/{{ ansible_user }}/scripts/04_swiss_pools.sh >> pools.txt
+    command: sh /home/{{ ansible_user }}/scripts/05_updates_enabled.sh >> updates.txt
     register: shelloutput
-    failed_when: "'FAILED' in shelloutput.stderr"
+    failed_when: "'FAILED' in shelloutput.stdout"
     
   - debug: msg="{{ shelloutput.stdout }}"
   - debug: msg="{{ shelloutput.stderr }}"

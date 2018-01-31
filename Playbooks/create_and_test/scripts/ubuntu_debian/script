@@ -1,6 +1,0 @@
-  - name: Run remote command
-  command: "bash -c 'ls -l /etc/init.d/a* | grep -c app'"
-  register: store
-
-- name: Run result against local script
-  local_action: "shell echo '{{ shelloutput.stdout }}' | /path/to/local/parser.py {{ inventory_hostname }}"
